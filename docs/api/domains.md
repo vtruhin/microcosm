@@ -201,7 +201,7 @@ class Edge {
 }
 
 class Network extends Domain {
-  setup (repo) {
+  setup () {
     this.addDomain('nodes', Node)
     this.addDomain('edges', Edge)
   }
