@@ -98,14 +98,6 @@ export default class Domain {
    * Microcosms?
    */
    addDomain (key, config) {
-     if (arguments.length < 2) {
-       // Important! Assignment this way is important
-       // to support IE9, which has an odd way of referencing
-       // arguments
-       config = key
-       key = []
-     }
-
      this._realm.add([this._key].concat(key), config)
 
      return this

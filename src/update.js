@@ -7,16 +7,6 @@
 import merge from './merge'
 
 function get (target, keys) {
-  if (keys == null) {
-    return target
-  }
-
-  if (Array.isArray(keys) === false) {
-    if (target && keys) {
-      return target[keys]
-    }
-  }
-
   for (var i = 0, len = keys.length; target && i < len; i++) {
     target = target[keys[i]]
   }
@@ -25,16 +15,6 @@ function get (target, keys) {
 }
 
 function set (target, keys, value) {
-  if (keys === null) {
-    return value
-  }
-
-  if (Array.isArray(keys) === false) {
-    if (target && keys) {
-      return merge({}, target, { [keys]: value })
-    }
-  }
-
   if (keys.length) {
     let head  = keys[0]
     let clone = merge({}, target)
