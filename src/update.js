@@ -17,7 +17,7 @@ function get (target, keys) {
     }
   }
 
-  for (var i = 0; target && i < keys.length; i++) {
+  for (var i = 0, len = keys.length; target && i < len; i++) {
     target = target[keys[i]]
   }
 
