@@ -266,7 +266,7 @@ export default class Microcosm extends Emitter {
    * @return {Microcosm} self
    */
   addDomain () {
-    this.realm.add.apply(this.realm, arguments)
+    this.realm.add(...arguments)
 
     return this.rebase()
   }

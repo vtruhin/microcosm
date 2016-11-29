@@ -90,4 +90,25 @@ export default class Domain {
     return next
   }
 
+
+  /**
+   * Add a sub-domain. This domain will be relative to the parent
+   *
+   * TODO: Could there be a time in the future when Domains are just
+   * Microcosms?
+   */
+   addDomain (key, config) {
+     if (arguments.length < 2) {
+       // Important! Assignment this way is important
+       // to support IE9, which has an odd way of referencing
+       // arguments
+       config = key
+       key = []
+     }
+
+     this._realm.add([this._key].concat(key), config)
+
+     return this
+   }
+
 }

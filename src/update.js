@@ -1,42 +1,50 @@
 /**
- * Retrieve a value from an object. If no key is provided, just
- * return the object.
- *
- * @example
- *     get({ foo: 'bar' }, 'foo') // 'bar'
- *     get({ foo: 'bar' }, undefined) // { foo: 'bar' }
- *
- * @param {Object} object - The target object
- * @param {String} key - The key to access
- * @return {Any} A retrieved value
+ * Non-destructive data operations
+ * Taken from Sprout:
+ * https://github.com/herrstucki/sprout/blob/master/src/util.js
  */
-function get (object, key) {
-  return key == null ? object : object[key]
+
+import merge from './merge'
+
+function get (target, keys) {
+  if (keys == null) {
+    return target
+  }
+
+  if (Array.isArray(keys) === false) {
+    if (target && keys) {
+      return target[keys]
+    }
+  }
+
+  for (var i = 0; target && i < keys.length; i++) {
+    target = target[keys[i]]
+  }
+
+  return target
 }
 
-/**
- * Immutabily assign a value to a provided object at a given key. If
- * the value is the same, don't do anything. Otherwise return a new
- * object.
- *
- * @example
- *     set({ foo: 'bar' }, 'baz', 'bip') // { foo: 'bar', baz: 'bip' }
- *
- * @param {Object} object - The target object
- * @param {String} key - The key to set
- * @param {Any} value - The value to assign
- * @return {Any} A copy of the object with the new assignment.
- */
-function set (object, key, value) {
-  // If the key path is null, there's no need to traverse the
-  // object. Just return the value.
-  if (key == null) {
+function set (target, keys, value) {
+  if (keys === null) {
     return value
   }
 
-  object[key] = value
+  if (Array.isArray(keys) === false) {
+    if (target && keys) {
+      return merge({}, target, { [keys]: value })
+    }
+  }
 
-  return object
+  if (keys.length) {
+    let head  = keys[0]
+    let clone = merge({}, target)
+
+    clone[head] = keys.length > 1 ? set(clone[head] || {}, keys.slice(1), value) : value
+
+    return clone
+  } else {
+    return value
+  }
 }
 
 export default { get, set }
