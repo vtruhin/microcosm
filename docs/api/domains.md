@@ -192,18 +192,18 @@ sub-domains for themselves.
 ```javascript
 import Domain from 'microcosm/domain'
 
-class Node {
+class Nodes {
   getInitialState() { return [] }
 }
 
-class Edge {
+class Edges {
   getInitialState() { return [] }
 }
 
 class Network extends Domain {
   setup () {
-    this.addDomain('nodes', Node)
-    this.addDomain('edges', Edge)
+    this.addDomain('nodes', Nodes)
+    this.addDomain('edges', Edges)
   }
 }
 
