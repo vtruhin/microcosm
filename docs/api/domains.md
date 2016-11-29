@@ -190,6 +190,8 @@ In all other ways, they are identical to regular domains, and can have
 sub-domains for themselves.
 
 ```javascript
+import Domain from 'microcosm/domain'
+
 class Node {
   getInitialState() { return [] }
 }
@@ -198,7 +200,7 @@ class Edge {
   getInitialState() { return [] }
 }
 
-class Network {
+class Network extends Domain {
   setup (repo) {
     this.addDomain('nodes', Node)
     this.addDomain('edges', Edge)
